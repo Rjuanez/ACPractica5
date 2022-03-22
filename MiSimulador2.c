@@ -90,9 +90,11 @@ void reference (unsigned int address)
             replacement = true;
             miss = true;
             if (mc[conj_mc].LRU == 0) { //cambiem via1
+                tag_out =mc[conj_mc].tag1;
                 mc[conj_mc].LRU = 1;
                 mc[conj_mc].tag1 = tag;
-            } else { //LRU = 1
+            } else { //LRU = 1 cambiem via0
+                tag_out =mc[conj_mc].tag0;
                 mc[conj_mc].LRU = 0;
                 mc[conj_mc].tag0 = tag;
             }
