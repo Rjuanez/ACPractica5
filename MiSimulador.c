@@ -53,13 +53,13 @@ void reference (unsigned int address)
     replacement = false;
     
     if (mc[linea_mc].valid == 0) { //miss perque esta vuida
-        cache[linea_mc].tag = tag;
-        cache[linea_mc].valid = 1;
+        mc[linea_mc].tag = tag;
+        mc[linea_mc].valid = 1;
         miss = true;
     }
     else if (mc[linea_mc].tag != tag) { //miss perque ja esta ocupada
         tag_out = mc[linea_mc].tag;
-        cache[linea_mc].tag = tag;
+        mc[linea_mc].tag = tag;
         miss = true;
         replacement = true;
         
