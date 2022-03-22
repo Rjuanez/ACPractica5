@@ -59,14 +59,12 @@ void reference (unsigned int address)
     if (mc[conj_mc].valid == 0) { //miss no hi ha res
         mc[conj_mc].tag0 = tag;
         mc[conj_mc].valid = 1;
-        mc[conj_mc].LRU = 0;
         via_mc = 0;
         miss = true;
     } else if (mc[conj_mc].valid == 1) { //hi ha una lliure, pero una ocupada
         if (mc[conj_mc].tag0 != tag) {  //si la que esta ocupada no es la que busquem omplim l'altre
             mc[conj_mc].tag1 = tag;
             mc[conj_mc].valid = 2;
-            mc[conj_mc].LRU = 1;
             via_mc = 1;
             miss = true;
         } else {
@@ -80,10 +78,8 @@ void reference (unsigned int address)
         if (via0_hit || via1_hit) { //acert en alguna de les vies
             if (via0_hit) {
                 via_mc = 0;
-                mc[conj_mc].LRU = 0;
             } else {
                 via_mc = 1;
-                mc[conj_mc].LRU = 1;
             }
             
         } else { //no esta en la mc
@@ -91,17 +87,16 @@ void reference (unsigned int address)
             miss = true;
             if (mc[conj_mc].LRU == 0) { //cambiem via1
                 tag_out =mc[conj_mc].tag1;
-                mc[conj_mc].LRU = 1;
                 mc[conj_mc].tag1 = tag;
                 via_mc = 1;
             } else { //LRU = 1 cambiem via0
                 tag_out =mc[conj_mc].tag0;
-                mc[conj_mc].LRU = 0;
                 mc[conj_mc].tag0 = tag;
                 via_mc = 0;
             }
         }
     }
+    mc[conj_mc].LRU = via_mc;
 
 	/* La funcio test_and_print escriu el resultat de la teva simulacio
 	 * per pantalla (si s'escau) i comproba si hi ha algun error
