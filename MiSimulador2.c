@@ -74,8 +74,9 @@ void reference (unsigned int address)
         }
         
     } else {    //estan totes plenes
-        bool via0_hit = mc[conj_mc].tag0 == tag;
-        if (via0_hit == false) bool via1_hit = mc[conj_mc].tag1 == tag;
+        unsigned char via0_hit = mc[conj_mc].tag0 == tag;
+        unsigned char via1_hit;
+        if (via0_hit == 0) via1_hit = mc[conj_mc].tag1 == tag;
         if (via0_hit || via1_hit) { //acert en alguna de les vies
             if (via0_hit) {
                 via_mc = 0;
