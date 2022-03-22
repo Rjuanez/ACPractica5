@@ -12,7 +12,8 @@ typedef struct {
 } linea_associativa;
 
 linea_associativa mc[64]; // Creem 64 lineas que son les que tindra la memoria directa ja que es asociatia de dues vies
-
+int fallos;
+int aciertos;
 
 /* La rutina init_cache es cridada pel programa principal per
  * inicialitzar la cache.
@@ -26,6 +27,8 @@ void init_cache ()
         mc[i].valid= 0;
         mc[i].LRU = 0;
     }
+    fallos = 0;
+    aciertos = 0;
 
 
 
@@ -97,6 +100,8 @@ void reference (unsigned int address)
         }
     }
     mc[conj_mc].LRU = via_mc;
+    if (miss) ++fallo;
+    else ++acierto;
 
 	/* La funcio test_and_print escriu el resultat de la teva simulacio
 	 * per pantalla (si s'escau) i comproba si hi ha algun error
@@ -112,6 +117,6 @@ void reference (unsigned int address)
 void final ()
 {
  	/* Escriu aqui el teu codi */ 
-  
+  Printf("Aciertos: %d Fallos: %d \n", aciertos, fallos);
   
 }

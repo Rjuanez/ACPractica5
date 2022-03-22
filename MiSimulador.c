@@ -9,6 +9,9 @@ typedef struct {
     int valid;
  } linea;
 
+int fallos;
+int aciertos;
+
 
 linea mc[128]; // Creem 128 lineas que son les que tindra la memoria directa ja que
 
@@ -24,7 +27,8 @@ void init_cache ()
 	/* Escriu aqui el teu codi */
     int i;
     for (i = 0; i < 128; i++) mc[i].valid = 0; //inicialitzem totes les lineas de la mc com a vuides posant a 0 tots els bits de validaci—
-    
+    fallos = 0;
+    aciertos = 0;
 
 
 }
@@ -64,6 +68,8 @@ void reference (unsigned int address)
         replacement = true;
         
     }
+    if (miss) ++fallo;
+    else ++acierto;
     
 	/* La funcio test_and_print escriu el resultat de la teva simulacio
 	 * per pantalla (si s'escau) i comproba si hi ha algun error
@@ -78,7 +84,7 @@ void reference (unsigned int address)
 /* La rutina final es cridada al final de la simulacio */ 
 void final ()
 {
- 	/* Escriu aqui el teu codi */ 
+    Printf("Aciertos: %d Fallos: %d \n", aciertos, fallos);
   
   
 }
