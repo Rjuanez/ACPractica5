@@ -100,8 +100,8 @@ void reference (unsigned int address)
         }
     }
     mc[conj_mc].LRU = via_mc;
-    if (miss) ++fallo;
-    else ++acierto;
+    if (miss) ++fallos;
+    else ++aciertos;
 
 	/* La funcio test_and_print escriu el resultat de la teva simulacio
 	 * per pantalla (si s'escau) i comproba si hi ha algun error
