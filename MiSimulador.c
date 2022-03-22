@@ -5,12 +5,12 @@
  * */
 
 typedef struct {
-   int tag;
-   int validez;
- } directa;
+   int tag;         //tag del bloc que ocupa la linea de memoria
+   int valid;
+ } linea;
 
 
-directa cache[128]; // Vector que simula la ocupació de mem cache de 128 linies ja que 128*32Byte = 4KB guardarem els tag.
+linea mc[128]; // Creem 128 lineas que son les que tindra la memoria directa ja que
 
 
 
@@ -23,9 +23,8 @@ void init_cache ()
     totaltime=0.0;
 	/* Escriu aqui el teu codi */
     int i;
-    for (i = 0; i < 128; i++){
-        cache[i].validez = 0; //Posem els tag a -1 per indicar que aquella linia esta buida
-    }
+    for (i = 0; i < 128; i++) cache[i].valid = 0; //inicialitzem totes les lineas de la mc com a vuides posant a 0 tots els bits de validació
+    
 
 
 }
@@ -39,31 +38,34 @@ void reference (unsigned int address)
 	unsigned int tag;
 	unsigned int miss;	   // boolea que ens indica si es miss
 	unsigned int replacement;  // boolea que indica si es reemplaÁa una linia valida
-	unsigned int tag_out;	   // TAG de la linia reemplaÁada
+	unsigned int tag_out;	   // TAG de la linia reemplaÁada,
 	float t1,t2;		// Variables per mesurar el temps (NO modificar)
 	
 	t1=GetTime();
 	/* Escriu aqui el teu codi */
 
 
-
-    byte = address & 31; //Fem un AND amb 0x1F per obtenir els ultims 5 bits que indiquen el byte accedit.
-    bloque_m = address/32; //Eliminem els 5 bits de menys pes
-    linea_mc = bloque_m & 127; //Fem un AND del bloc amb 0x7F per obtenir els 7 bits de menys pes del bloc que indiquen la linia de mc.
-    tag = bloque_m/128; //Eliminem els 7 bits de menys pes que son els de linia per obtenir el tag
-    tag_out = -1; //Iniciem el tag de sortida com a -1 per defecte.
-    miss = (cache[linea_mc].validez == 0 || cache[linea_mc].tag != tag);
-    replacement = (cache[linea_mc].validez == 1 && cache[linea_mc].tag != tag);
-
-    if (cache[linea_mc].validez == 0) { //Miss lectura, linia de cache buida (no reemplaçament)
+    byte = adress & 0x1F; //Obtenim els ultims 5 bits que inidiquen el byte accedit ja que el tamany de linea es 32bytes
+    bloque_m = adress >> 5; //treiem els 5 últims bits per tal d'obtenir quin bloc de 32bytes estem accedint
+    linea_mc = bloque_m & 0x7F; //ens quedem amb els 7 primers bits de menys pes de la adreça que ens indicaran a quina linea de la memoria va el bloc
+    tag = bloque_m >> 7; //teriem els 7 bits de menys pes de
+    miss = false;
+    replacement = false;
+    
+    if (mc[linea_mc].valid == 0) { //miss perque esta vuida
         cache[linea_mc].tag = tag;
-        cache[linea_mc].validez = 1;
+        cache[linea_mc].valid = 1;
+        miss = true;
     }
-    else if (cache[linea_mc].validez == 1 && cache[linea_mc].tag != tag) { //Miss lectura, (si reemplaçament)
-        tag_out = cache[linea_mc].tag;
+    else if (mc[linea_mc].tag != tag) { //miss perque ja esta ocupada
+        tag_out = mc[linea_mc].tag;
         cache[linea_mc].tag = tag;
+        miss = true;
+        replacement = true;
+        
+        
     }
-
+    
 	/* La funcio test_and_print escriu el resultat de la teva simulacio
 	 * per pantalla (si s'escau) i comproba si hi ha algun error
 	 * per la referencia actual. TambÈ mesurem el temps d'execuciÛ
