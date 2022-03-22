@@ -1,5 +1,5 @@
 #include "CacheSim.h"
-
+#include <stdio.h>
 /* Posa aqui les teves estructures de dades globals
  * per mantenir la informacio necesaria de la cache
  * */
