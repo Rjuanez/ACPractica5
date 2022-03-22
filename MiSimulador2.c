@@ -49,7 +49,7 @@ void reference (unsigned int address)
 
     byte = address & 0x1F; //Obtenim els ultims 5 bits que inidiquen el byte accedit ja que el tamany de linea es 32bytes
     bloque_m = address >> 5; //treiem els 5 œltims bits per tal d'obtenir quin bloc de 32bytes estem accedint
-    conj_mc = bloque_m & 0x5F; //ens quedem amb els 6 primers bits de menys pes de la adrea que ens indicaran a quina linea de la memoria va el bloc
+    conj_mc = bloque_m & 0b111111; //ens quedem amb els 6 primers bits de menys pes de la adrea que ens indicaran a quina linea de la memoria va el bloc
     tag = bloque_m >> 6; //teriem els 6 bits de menys pes de
     miss = false;
     replacement = false;
