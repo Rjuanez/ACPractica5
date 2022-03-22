@@ -84,7 +84,7 @@ void reference (unsigned int address)
 /* La rutina final es cridada al final de la simulacio */ 
 void final ()
 {
-    Printf("Aciertos: %d Fallos: %d \n", aciertos, fallos);
+    printf("Aciertos: %d Fallos: %d \n", aciertos, fallos);
   
   
 }

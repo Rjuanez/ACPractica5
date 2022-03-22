@@ -118,6 +118,6 @@ void reference (unsigned int address)
 void final ()
 {
  	/* Escriu aqui el teu codi */ 
-  Printf("Aciertos: %d Fallos: %d \n", aciertos, fallos);
+  printf("Aciertos: %d Fallos: %d \n", aciertos, fallos);
   
 }
