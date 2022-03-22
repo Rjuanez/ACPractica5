@@ -23,7 +23,7 @@ void init_cache ()
     totaltime=0.0;
 	/* Escriu aqui el teu codi */
     int i;
-    for (i = 0; i < 128; i++) cache[i].valid = 0; //inicialitzem totes les lineas de la mc com a vuides posant a 0 tots els bits de validaci—
+    for (i = 0; i < 128; i++) mc[i].valid = 0; //inicialitzem totes les lineas de la mc com a vuides posant a 0 tots els bits de validaci—
     
 
 
