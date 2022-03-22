@@ -5,8 +5,8 @@
  * */
 
 typedef struct {
-   int tag;         //tag del bloc que ocupa la linea de memoria
-   int valid;
+    int tag;         //tag del bloc que ocupa la linea de memoria
+    int valid;
  } linea;
 
 

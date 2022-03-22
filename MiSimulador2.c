@@ -4,7 +4,14 @@
  * per mantenir la informacio necesaria de la cache
  * */
 
+typedef struct {
+    char valid;
+    int tag0;
+    int tag1;
+    int LRU; //least recently used, ultima via que hem fet servir
+} linea_associativa;
 
+linea_associativa mc[64]; // Creem 64 lineas que son les que tindra la memoria directa ja que es asociatia de dues vies
 
 
 /* La rutina init_cache es cridada pel programa principal per
@@ -15,6 +22,10 @@ void init_cache ()
 {
     totaltime=0.0;
 	/* Escriu aqui el teu codi */
+    for (int i = 0; i < 64; ++i) {
+        mc[i].valid= 0;
+        mc[i].LRU = 0;
+    }
 
 
 
@@ -36,19 +47,56 @@ void reference (unsigned int address)
 	t1=GetTime();
 	/* Escriu aqui el teu codi */
 
+    byte = address & 0x1F; //Obtenim els ultims 5 bits que inidiquen el byte accedit ja que el tamany de linea es 32bytes
+    bloque_m = address >> 5; //treiem els 5 œltims bits per tal d'obtenir quin bloc de 32bytes estem accedint
+    conj_mc = bloque_m & 0x5F; //ens quedem amb els 6 primers bits de menys pes de la adrea que ens indicaran a quina linea de la memoria va el bloc
+    tag = bloque_m >> 6; //teriem els 6 bits de menys pes de
+    miss = false;
+    replacement = false;
+    
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
+    if (mc[conj_mc].valid == 0) { //miss no hi ha res
+        mc[conj_mc].tag0 = tag;
+        mc[conj_mc].valid = 1;
+        mc[conj_mc].LRU = 0;
+        via_mc = 0;
+        miss = true;
+    } else if (mc[conj_mc].valid == 1) { //hi ha una lliure, pero una ocupada
+        if (mc[conj_mc].tag0 != tag) {  //si la que esta ocupada no es la que busquem omplim l'altre
+            mc[conj_mc].tag1 = tag;
+            mc[conj_mc].valid = 2;
+            mc[conj_mc].LRU = 1;
+            via_mc = 1;
+            miss = true;
+        } else {
+            via_mc = 0;
+        }
+        
+    } else {    //estan totes plenes
+        bool via0_hit = mc[conj_mc].tag0 == tag;
+        if (via0_hit == false) bool via1_hit = mc[conj_mc].tag1 == tag;
+        if (via0_hit || via1_hit) { //acert en alguna de les vies
+            if (via0_hit) {
+                via_mc = 0;
+                mc[conj_mc].LRU = 0;
+            } else {
+                via_mc = 1;
+                mc[conj_mc].LRU = 1;
+            }
+            
+        } else { //no esta en la mc
+            replacement = true;
+            miss = true;
+            if (mc[conj_mc].LRU == 0) { //cambiem via1
+                mc[conj_mc].LRU = 1;
+                mc[conj_mc].tag1 = tag;
+            } else { //LRU = 1
+                mc[conj_mc].LRU = 0;
+                mc[conj_mc].tag0 = tag;
+            }
+        }
+    }
 
 	/* La funcio test_and_print escriu el resultat de la teva simulacio
 	 * per pantalla (si s'escau) i comproba si hi ha algun error
