@@ -93,10 +93,12 @@ void reference (unsigned int address)
                 tag_out =mc[conj_mc].tag1;
                 mc[conj_mc].LRU = 1;
                 mc[conj_mc].tag1 = tag;
+                via_mc = 1;
             } else { //LRU = 1 cambiem via0
                 tag_out =mc[conj_mc].tag0;
                 mc[conj_mc].LRU = 0;
                 mc[conj_mc].tag0 = tag;
+                via_mc = 0;
             }
         }
     }
