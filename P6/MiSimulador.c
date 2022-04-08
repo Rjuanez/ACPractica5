@@ -62,19 +62,19 @@ void reference (unsigned int address, unsigned int LE)
     miss = 0;
 
     
-    if (mc[linea_mc].valid == 0) { //miss perque esta vuida
-        miss = 1;
+    if (mc[linea_mc].valid == false) { //miss perque esta vuida
+        miss = true;
         ++miss_count;
         
-        if (LE == 0) { // Lectura
-            lec_mp = 1;
+        if (LE == false) { // Lectura
+            lec_mp = true;
             mida_lec_mp = 32;
             mc[linea_mc].tag = tag;
-            mc[linea_mc].valid = 1;
+            mc[linea_mc].valid = true;
         }
         else { // Escriptura
-            esc_mp = 1;
-            mida_esc_mp = 1;
+            esc_mp = true;
+            mida_esc_mp = true;
             ++write_count;
         }
         
@@ -83,11 +83,11 @@ void reference (unsigned int address, unsigned int LE)
     }
     else if (mc[linea_mc].tag != tag) { //miss perque ja esta ocupada
         
-        miss = 1;
+        miss = true;
         ++miss_count;
-        if (LE == 0) { // Lectura
-            replacement = 1;
-            lec_mp = 1;
+        if (LE == false) { // Lectura
+            replacement = true;
+            lec_mp = true;
             mida_lec_mp = 32;
             tag_out = mc[linea_mc].tag;
             mc[linea_mc].tag = tag;
@@ -99,11 +99,11 @@ void reference (unsigned int address, unsigned int LE)
         }
         
     } else if (mc[linea_mc].tag == tag) { //hit
-        miss = 0;
+        miss = false;
         ++hit_count;
-        if (LE == 1) { // Escriptura
-            esc_mp = 1;
-            mida_esc_mp = 1;
+        if (LE == true) { // Escriptura
+            esc_mp = false;
+            mida_esc_mp = true;
             ++write_count;
         }
     }
