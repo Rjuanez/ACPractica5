@@ -74,7 +74,7 @@ void reference (unsigned int address, unsigned int LE)
         
         lec_mp = 1;
         mida_lec_mp = 32;
-        mc[linea_mc].v = 1;
+        mc[linea_mc].valid = 1;
         mc[linea_mc].tag = tag;
             
         
@@ -97,7 +97,7 @@ void reference (unsigned int address, unsigned int LE)
             ++write_count;
         }
         
-        if (LE) mc[linea_mc].dirty = 1
+        if (LE) mc[linea_mc].dirty = 1;
         
         lec_mp = 1;
         mida_lec_mp = 32;
