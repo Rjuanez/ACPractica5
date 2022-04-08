@@ -1,4 +1,5 @@
 #include "CacheSim.h"
+#include <stdio.h>
 
 /* Posa aqui les teves estructures de dades globals
  * per mantenir la informacio necesaria de la cache
@@ -23,7 +24,6 @@ int write_count;
  * */
 void init_cache ()
 {
-    totaltime=0.0;
     /* Escriu aqui el teu codi */
     int i;
     for (i = 0; i < 128; i++) mc[i].valid = 0; //inicialitzem totes les lineas de la mc com a vuides posant a 0 tots els bits de validaci—
@@ -70,7 +70,7 @@ void reference (unsigned int address, unsigned int LE)
             replacement = 1;
             lec_mp = 1;
             mida_lec_mp = 32;
-            tag_out = cache[linea_mc].tag;
+            tag_out = mc[linea_mc].tag;
             mc[linea_mc].tag = tag;
             mc[linea_mc].valid = 1;
         }
