@@ -24,7 +24,7 @@ _IniFor:
     andb $1, %dl    #dl = mata[i*n+j]  & 1
     movb %dl, (%edi)    #matb[i*n+j] = %dl <- tractem amb chars
 _IniIf:
-    cmpb $0, (%ecx)        #matb[i*n+j] > 0
+    cmpb $0, (%edi)        #matb[i*n+j] > 0
     jle _IniElse        #saltem quan matc[i*n+j] <= 0
     movb $255, (%edi)    #matb[i*n+j] = FF
     jmp _Fi
@@ -33,7 +33,6 @@ _IniElse:
 _Fi:
     incl %esi        #i+=1
     incl %ebx        #nem al següent element amb chars i seq
-    incl %ecx
     incl %edi
     jmp _IniFor
 
