@@ -11,10 +11,10 @@ procesar:
 	pushl	%edi
 
 # Aqui has de introducir el codigo
-movl $0, %esi        #%esi(=i) = 0
-    movl 8(%ebp), %ebx    #%ebx = *mata
-    movl 12(%ebp), %edi    #%edi = *matb
-    movl 16(%ebp), %ecx    #%ecx = n
+    movl $0, %esi        #%esi(=i) = 0
+    movl 4(%ebp), %ebx    #%ebx = *mata
+    movl 8(%ebp), %edi    #%edi = *matb
+    movl 12(%ebp), %ecx    #%ecx = n
     
     imul %eax, %eax        #eax = n²
 _For:
@@ -26,7 +26,7 @@ _For:
 _If:
     cmpb $0, (%edi)
     jle _Else        #matb[i*n+j] <= 0
-    movb $255, (%edi)   #matb[i*n+j] = FF
+    movb $255, (%edi)   #matb[i*n+j] = 255
     jmp _Fi
 _Else:
     movb $0, (%edi)     #matb[i*n+j] = 0
