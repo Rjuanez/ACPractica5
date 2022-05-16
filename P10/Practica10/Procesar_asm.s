@@ -17,24 +17,24 @@ movl $0, %esi        #%esi(=i) = 0
     movl 16(%ebp), %ecx    #%ecx = n
     
     imul %eax, %eax        #eax = n²
-_IniFor:
-    cmpl %eax, %esi        #%i < n² 
-    jge _FiFor
+_For:
+    cmpl %eax, %esi        #%i < n²
+    jge _For
     movb (%ebx), %dl    #dl = mata[i*n+j]
     andb $1, %dl        #dl = mata[i*n+j]  & 1
     movb %dl, (%edi)    #matb[i*n+j] = %dl
-_IniIf:
+_If:
     cmpb $0, (%edi)
-    jle _IniElse        #matb[i*n+j] <= 0
+    jle _Else        #matb[i*n+j] <= 0
     movb $255, (%edi)   #matb[i*n+j] = FF
     jmp _Fi
-_IniElse:
+_Else:
     movb $0, (%edi)     #matb[i*n+j] = 0
 _Fi:
     incl %esi           #i+=1
     incl %ebx
     incl %edi
-    jmp _IniFor
+    jmp _For
 
 _FiFor:
 
