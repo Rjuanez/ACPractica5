@@ -26,10 +26,10 @@ _IniFor:
 _IniIf:
     cmpb $0, (%edi)        #matb[i*n+j] > 0
     jle _IniElse        #saltem quan matc[i*n+j] <= 0
-    movb $255, (%edi)    #matb[i*n+j] = FF
+    movb $0, (%edi)    #matb[i*n+j] = FF
     jmp _Fi
 _IniElse:
-    movb $0, (%edi)        #matb[i*n+j] = 0
+    movb $255, (%edi)        #matb[i*n+j] = 0
 _Fi:
     incl %esi        #i+=1
     incl %ebx        #nem al següent element amb chars i seq
