@@ -16,7 +16,7 @@ procesar:
     movl 12(%ebp), %edi    #%edi = *matb
     movl 16(%ebp), %ecx    #%ecx = n
     
-    imul %eax, %eax        #eax = n²
+    imul %eax, %eax, %eax       #eax = n²
 _For:
     cmpl %eax, %esi        #%i < n²
     jge _FiFor
