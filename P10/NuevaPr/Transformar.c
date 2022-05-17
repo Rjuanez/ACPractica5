@@ -40,7 +40,7 @@ void leer(unsigned char mat[N][N], char fichero[], tinfo_fichero *info) {
   fclose(f);
 }
 
-void escribir(unsigned char mat[N][N], char fichero[], tinfo_fichero info) {
+void escribir(unsigned char  mat[N][N], char fichero[], tinfo_fichero info) {
   int i, j;
   FILE *f;
   
@@ -78,10 +78,10 @@ float GetTime();
 
 void main() {
   float t1, t2;
-  unsigned char mat1[N][N];
+  unsigned char mat1[N][N] __attribute__((aligned (16)));
   int i;
   char tonto;
-  unsigned char mat2[N][N];
+  unsigned char mat2[N][N] __attribute__((aligned (16)));
   tinfo_fichero info;
     
   // Podeis crear mas contadores de tiempo o mover los que ya hay
