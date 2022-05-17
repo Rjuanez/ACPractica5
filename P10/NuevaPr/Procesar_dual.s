@@ -28,7 +28,7 @@ procesar:
         jnz _IniciForNoAl
 
 
-IniciForAl:
+_IniciForAl:
         cmpl %edi, %eax
         jge _Fi
         movdqa (%ebx), %xmm0   #%xmm0 = mata[i*n+j]
