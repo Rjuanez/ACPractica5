@@ -15,18 +15,21 @@ procesar:
 
 # Aqui has de introducir el codigo
         movl $0, %eax       # %eax = i = 0
-        movl 8(%ebp), %ebx  #%ebx = *mata
-        movl 12(%ebp), %esi #%esi = *matb
+        leal 8(%ebp), %ebx  #%ebx = *mata
+        leal 12(%ebp), %esi #%esi = *matb
         movl 16(%ebp), %edi #%edi = n
         
         imul %edi, %edi
 
         test $0x0000000F, %ebx
-        jnz _IniciForNoAl
+        jnz _NoAl:
 
         test $0x0000000F, %esi
-        jnz _IniciForNoAl
+        jnz _NoAl:
 
+
+movl 8(%ebp), %ebx  #%ebx = *mata
+movl 12(%ebp), %esi #%esi = *matb
 
 _IniciForAl:
         cmpl %edi, %eax
@@ -42,6 +45,10 @@ _IniciForAl:
         addl $16, %ebx
         addl $16, %esi
         jmp _IniciForAl
+
+_NoAl:
+movl 8(%ebp), %ebx  #%ebx = *mata
+movl 12(%ebp), %esi #%esi = *matb
 
 _IniciForNoAl:
         cmpl %edi, %eax
