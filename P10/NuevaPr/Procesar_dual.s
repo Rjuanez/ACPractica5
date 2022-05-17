@@ -21,10 +21,10 @@ procesar:
         
         imul %edi, %edi
 
-        test %ebx, $0x0000000F
+        test %ebx, $15
         jnz _IniciForNoAl
 
-        test %esi, $0x0000000F
+        test %esi, $15
         jnz _IniciForNoAl
 
 
