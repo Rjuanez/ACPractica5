@@ -1,5 +1,6 @@
 .data
     inmediat: .byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+inmediat2: .byte 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 .text
 	.align 4
 	.globl procesar
@@ -23,7 +24,8 @@ _IniciFor:
         cmpl %edi, %eax
         jge _Fi
         movdqu (%ebx), %xmm0   #%xmm0 = mata[i*n+j]
-        pandb $1, %xmm0        #%xmm0 = mata[i*n+j] & 1
+        movdqu inmediat2, %xmm1    #xmm1 <- 0
+        pand %xmm1, %xmm0        #%xmm0 = mata[i*n+j] & 1
         movdqu %xmm0, (%esi)
         movdqu inmediat, %xmm1    #xmm1 <- 0
         pcmpgtb %xmm2, %xmm0    #matc[i*n+j] > 0
