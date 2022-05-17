@@ -12,7 +12,7 @@ procesar:
 
 # Aqui has de introducir el codigo
     movl $0, %eax       # %eax = i = 0
-    movl 8(%ebp), %ebx  #%ebc = *mata
+    movl 8(%ebp), %ebx  #%ebx = *mata
     movl 12(%ebp), %esi #%esi = *matb
     movl 16(%ebp), %edi #%edi = n
     
@@ -20,10 +20,10 @@ procesar:
 _IniciFor:
     cmpl %edi, %eax
     jge _Fi
-    movb (%ebc), %dl
+    movb (%ebx), %dl
     andb $1, %dl
     movb %dl, (%esi)
-    cmpl &0, (%esi)
+    cmpl $0, (%esi)
     jle _Else
     movb $255, (%esi)
     jmp _FiFor
@@ -34,7 +34,7 @@ _FiFor:
     incl %ebx
     incl %esi
     jmp _IniciFor
-_Fi
+_Fi:
 
 
 # El final de la rutina ya esta programado
