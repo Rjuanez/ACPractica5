@@ -1,4 +1,5 @@
 .data
+    .align 16
     inmediat: .byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
     inmediat2: .byte 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 .text
