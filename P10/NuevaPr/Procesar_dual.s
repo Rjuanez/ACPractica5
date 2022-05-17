@@ -22,10 +22,10 @@ procesar:
         imul %edi, %edi
 
         test $0x0000000F, %ebx
-        jnz _NoAl:
+        jnz _NoAl
 
         test $0x0000000F, %esi
-        jnz _NoAl:
+        jnz _NoAl
 
 
 movl 8(%ebp), %ebx  #%ebx = *mata
