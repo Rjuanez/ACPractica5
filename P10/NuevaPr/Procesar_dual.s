@@ -38,7 +38,6 @@ IniciForAl:
         movdqa inmediat, %xmm1
         pcmpgtb %xmm1, %xmm0
         movdqa %xmm0, (%esi)
-_FiFor:
         addl $16, %eax
         addl $16, %ebx
         addl $16, %esi
@@ -54,7 +53,6 @@ _IniciForNoAl:
         movdqu inmediat, %xmm1
         pcmpgtb %xmm1, %xmm0
         movdqu %xmm0, (%esi)
-_FiFor:
         addl $16, %eax
         addl $16, %ebx
         addl $16, %esi
