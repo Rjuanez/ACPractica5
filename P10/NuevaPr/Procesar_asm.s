@@ -22,7 +22,7 @@ _IniciFor:
     jge _Fi
     movb (%ebx), %dl
     andb $1, %dl
-    cmpl $0, %dl
+    cmpb $0, %dl
     jle _Else
     movb $255, (%esi)
     jmp _FiFor
