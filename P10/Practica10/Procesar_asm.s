@@ -18,7 +18,7 @@ procesar:
     
     imul %eax, %eax        #eax = n²
 _For:
-    cmpl %esi, %eax        #%i < n²
+    cmpl %eax, %esi        #%i < n²
     jge _FiFor
     movb (%ebx), %dl    #dl = mata[i*n+j]
     andb $1, %dl        #dl = mata[i*n+j]  & 1
