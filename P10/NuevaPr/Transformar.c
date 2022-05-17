@@ -78,10 +78,10 @@ float GetTime();
 
 void main() {
   float t1, t2;
-  unsigned char mat1[N][N] __attribute__((aligned (16)));
+  unsigned char mat1[N][N];
   int i;
   char tonto;
-  unsigned char mat2[N][N] __attribute__((aligned (16)));
+  unsigned char mat2[N][N];
   tinfo_fichero info;
     
   // Podeis crear mas contadores de tiempo o mover los que ya hay
