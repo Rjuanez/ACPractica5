@@ -23,13 +23,13 @@ procesar:
 _IniciFor:
         cmpl %edi, %eax
         jge _Fi
-        movdqu (%ebx), %xmm0   #%xmm0 = mata[i*n+j]
-        movdqu inmediat2, %xmm1    #xmm1 <- 0
+        movdqa (%ebx), %xmm0   #%xmm0 = mata[i*n+j]
+        movdqa inmediat2, %xmm1    #xmm1 <- 0
         pand %xmm1, %xmm0        #%xmm0 = mata[i*n+j] & 1
-        movdqu %xmm0, (%esi)
-        movdqu inmediat, %xmm1
+        movdqa %xmm0, (%esi)
+        movdqa inmediat, %xmm1
         pcmpgtb %xmm1, %xmm0
-        movdqu %xmm0, (%esi)
+        movdqa %xmm0, (%esi)
 _FiFor:
         addl $16, %eax
         addl $16, %ebx
