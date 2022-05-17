@@ -25,11 +25,11 @@ _IniciFor:
         jge _Fi
         movdqu (%ebx), %xmm0   #%xmm0 = mata[i*n+j]
         movdqu inmediat2, %xmm1    #xmm1 <- 0
-        vpandq %xmm1, %xmm0        #%xmm0 = mata[i*n+j] & 1
+        pand %xmm1, %xmm0        #%xmm0 = mata[i*n+j] & 1
         movdqu %xmm0, (%esi)
         movdqu inmediat, %xmm2
         pcmpgtb %xmm2, %xmm0
-        movdqu %xmm0, (%esi)    
+        movdqu %xmm0, (%esi)
 _FiFor:
         addl $16, %eax
         addl $16, %ebx
