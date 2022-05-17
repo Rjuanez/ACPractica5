@@ -26,10 +26,7 @@ _IniciFor:
         movdqu (%ebx), %xmm0   #%xmm0 = mata[i*n+j]
         movdqu inmediat2, %xmm1    #xmm1 <- 0
         pand %xmm1, %xmm0        #%xmm0 = mata[i*n+j] & 1
-        movdqu %xmm0, (%esi)
-        movdqu inmediat, %xmm1    #xmm1 <- 0
-        pcmpgtb %xmm1, %xmm0    #matc[i*n+j] > 0
-        movdqu %xmm0, (%ecx)    #matc[i*n+j] = %xmm0
+
 _FiFor:
         addl $16, %eax
         addl $16, %ebx

@@ -20,18 +20,16 @@ procesar:
 _IniciFor:
     cmpl %edi, %eax
     jge _Fi
-    movb (%ebx), %dl    #%dl = mata[i*n+j]
+    movb (%ebx, %eax), %dl    #%dl = mata[i*n+j]
     andb $1, %dl        #%dl = mata[i*n+j] & 1
     cmpb $0, %dl
     jle _Else
-    movb $255, (%esi)   #matb[i*n+j] = 255
+    movb $255, (%esi, %eax)   #matb[i*n+j] = 255
     jmp _FiFor
 _Else:
-    movb $0,(%esi)      #matb[i*n+j] = 0;
+    movb $0,(%esi, %eax)      #matb[i*n+j] = 0;
 _FiFor:
     incl %eax
-    incl %ebx
-    incl %esi
     jmp _IniciFor
 _Fi:
 
